@@ -1,14 +1,17 @@
+import json
+
 import requests
 
 
-URL = "https://restcountries.com/v3.1/all"
-URL_NAME= "https://restcountries.com/v3.1/name/brasil"
+URL_ALL = "https://restcountries.com/v3.1/all"
+#URL_NAME= "https://restcountries.com/v3.1/name/brasil"
 
-resposta = requests.get(URL)
-resposta2=requests.get(URL_NAME)
+resposta = requests.get(URL_ALL)
 
-print(resposta.status_code)
-print(resposta.text)
+paises = json.loads(resposta.text) #parsing de json para python
 
-print(resposta2.text)
+print(len(paises))
+
+for pais in paises :
+    print(pais['name']['common'], pais['currencies'])
 
